@@ -34,7 +34,7 @@ void setupsignals();
 void sighandler(int signum);
 int getstatus(char *str, char *last);
 void statusloop();
-void termhandler();
+void termhandler(int sig);
 void pstdout();
 #ifndef NO_X
 void setroot();
@@ -170,7 +170,7 @@ void sighandler(int signum) {
   writestatus();
 }
 
-void termhandler() { statusContinue = 0; }
+void termhandler(int sig) { statusContinue = 0; }
 
 int main(int argc, char **argv) {
   for (int i = 0; i < argc; i++) { // Handle command line arguments
