@@ -3,23 +3,14 @@
 static const Block blocks[] = {
     /*Icon*/ /*Command*/ /*Update Interval*/ /*Update Signal*/
 
-    /* CPU Temperature */
-    {"",
-     "sed 's/.$//' /sys/class/thermal/thermal_zone0/temp | awk '{printf "
-     "\"%.1f°C\", $1/1000}'",
-     5, 0},
+    /* home partition size (used / total) */
+    {"󰋜 ", "df -h / | awk 'NR==2 {print $3 \"/\" $2}'", 30, 0},
 
-    /* Home partition size (used / total) */
-    {"", "df -h / | awk 'NR==2 {print $3 \"/\" $2}'", 30, 0},
-
-    /* Date */
-    {"", "date '+%a %b %d'", 60, 0},
-
-    /* Time */
-    {"", "date '+%H:%M'", 5, 0},
+    /* date + time */
+    {"󰥔 ", "date '+%a, %b %d  %I:%M %p'", 5, 0},
 };
 
 // sets delimiter between status commands. NULL character ('\0') means no
 // delimiter.
-static char delim[] = " | ";
-static unsigned int delimLen = 5;
+static char delim[] = "   ";
+static unsigned int delimLen = 3;
