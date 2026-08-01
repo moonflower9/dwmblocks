@@ -4,16 +4,13 @@ static const Block blocks[] = {
     /*Icon*/ /*Command*/ /*Update Interval*/ /*Update Signal*/
 
     /* CPU temp */
-    {" ",
-     "sed 's/.$//' /sys/class/thermal/thermal_zone0/temp | awk '{printf "
-     "\"%.1fC\", $1/1000}'",
-     5, 0},
+    {" ", "sensors | awk '/Tctl:/ {print $2}' | tr -d '+'", 5, 0},
 
     /* RAM usage */
-    {"󰍛 ", "free -h | awk '/^Mem:/ {print $3 \"/\" $2}'", 5, 0},
+    {" ", "free -h | awk '/^Mem:/ {print $3}'", 5, 0},
 
     /* home partition size (used / total) */
-    {"󰋜 ", "df -h / | awk 'NR==2 {print $3 \"/\" $2}'", 30, 0},
+    {"󰋜 ", "df -h / | awk 'NR==2 {print $3}'", 30, 0},
 
     /* date + time */
     {"󰥔 ", "date '+%a, %b %d  %I:%M %p'", 5, 0},
